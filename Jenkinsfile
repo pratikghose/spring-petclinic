@@ -10,7 +10,7 @@ pipeline {
                 #mvn compile
                 #mvn verify
                 #mvn package
-                vn verify sonar:sonar
+                mvn verify sonar:sonar
                 '''
             }
         }
