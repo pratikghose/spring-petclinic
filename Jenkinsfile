@@ -38,7 +38,6 @@ pipeline {
                  docker login -u "pratikghose" -p "BigdaNawab@17"
                  docker build -t pratikghose/petclinic:1.0.0 .
                  docker push pratikghose/petclinic:1.0.0
-                 docker run -it pratikghose/petclinic:1.0.0
                  '''
             }
         }
