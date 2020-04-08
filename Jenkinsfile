@@ -9,6 +9,7 @@ pipeline {
                 mvn clean
                 mvn compile
                 mvn verify
+                mvn package
                 '''
             }
         }
