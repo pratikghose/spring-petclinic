@@ -17,7 +17,7 @@ pipeline {
             }
         }
         
-        stages('Containerization') {
+        stage('Containerization') {
             steps {
                 sh 'ls'
                 withCredentials([usernamePassword(credentialsId: 'Docker-Credentials', passwordVariable: 'password', usernameVariable: 'username')])
