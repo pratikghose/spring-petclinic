@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('Build'){
+        stage('Build') {
             steps {
                 sh label: '', script: '''
                 export MAVEN_HOME=/usr/local/Cellar/maven/3.6.3_1/libexec
@@ -11,6 +11,11 @@ pipeline {
                 mvn verify
                 mvn package
                 '''
+            }
+        }
+        stage('Code Analysis') {
+            steps {
+                sh label: '', script:"mvn verify sonar:sonar"
             }
         }
     }
