@@ -16,6 +16,19 @@ pipeline {
                 '''
             }
         }
+        
+        stages('Containerization') {
+            steps {
+                sh 'ls'
+                withCredentials([usernamePassword(credentialsId: 'Docker-Credentials', passwordVariable: 'password', usernameVariable: 'username')])
+                 sh label: '', script: '''
+                 docker login -u ${username} -p ${password}
+                 docker build -t pratikghose/petclinic:1.0.0
+                 docker push pratikghose/petclinic:1.0.0
+                 '''
+            }
+        
+        }
 
     }
 }
