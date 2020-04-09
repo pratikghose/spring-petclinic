@@ -29,16 +29,17 @@ pipeline {
         stage('Containerization') {
             steps {
                 sh 'ls'
-                withCredentials([usernamePassword(credentialsId: 'Docker-Credentials', passwordVariable: 'password', usernameVariable: 'username')])
-                 sh label: '', script: '''
-                 export DOCKER_HOME=/usr/local/
-                 export PATH=$PATH:$DOCKER_HOME/bin
+                withCredentials([usernamePassword(credentialsId: 'Docker-Credentials', passwordVariable: 'password', usernameVariable: 'username')]){
+                    sh label: '', script: '''
+                    export DOCKER_HOME=/usr/local/
+                    export PATH=$PATH:$DOCKER_HOME/bin
                  
                  
-                 docker login -u ${username} -p ${password}
-                 docker build -t pratikghose/petclinic:1.0.0 .
-                 docker push pratikghose/petclinic:1.0.0
-                 '''
+                    docker login -u ${username} -p ${password}
+                    docker build -t pratikghose/petclinic:1.0.0 .
+                    docker push pratikghose/petclinic:1.0.0
+                    '''
+                }
             }
         }
 
