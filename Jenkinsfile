@@ -42,6 +42,21 @@ pipeline {
                 }
             }
         }
+        
+        
+        stage('Deploy'){
+            dir('TerraformModules'){
+                withCredentials([string(credentialsId: 'subscription-id', variable: 'subid'), string(credentialsId: 'tenant-id', variable: 'tenantid'), string(credentialsId: 'client-id', variable: 'clientid'), string(credentialsId: 'client-secret', variable: 'clientsecret')]) {
+                    sh label: '', script: '''
+                        terraform init -input=false
+                        terraform apply -var="prefix=prod${BUILD_NUMBER}" -var="subscription_id=${subid}" -var="client_id=${clientid}" -var="client_secret=${clientsecret}" -var="tenant_id=${tenantid}" -input=false -auto-approve
+                        terraform output
+                    '''
+                }
+                
+            }
+        }
+            
 
     }
 }
