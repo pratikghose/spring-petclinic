@@ -60,15 +60,6 @@ pipeline {
                 }
             }
         }
-        post {
-            always {
-			    emailext (
-                    to: "prateekghose765@gmail.com",
-                    subject: '${DEFAULT_SUBJECT}',
-                    body: '${DEFAULT_CONTENT}',
-                )
-            }
-        }
             
 
     }
