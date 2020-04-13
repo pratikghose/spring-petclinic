@@ -8,9 +8,9 @@ pipeline {
                 export PATH=$PATH:$MAVEN_HOME/bin
                 export SONAR_HOME=/usr/local/Cellar/sonar-scanner/4.3.0.2102/libexec
                 export PATH=$PATH:$SONAR_HOME/bin
-                mvn clean
-                mvn compile
-                mvn package
+                mvn clean -Dcheckstyle.skip
+                mvn compile -Dcheckstyle.skip
+                mvn package -Dcheckstyle.skip
                 '''
             }
         }
@@ -21,7 +21,7 @@ pipeline {
                 export PATH=$PATH:$MAVEN_HOME/bin
                 export SONAR_HOME=/usr/local/Cellar/sonar-scanner/4.3.0.2102/libexec
                 export PATH=$PATH:$SONAR_HOME/bin
-                mvn verify sonar:sonar
+                mvn verify sonar:sonar -Dcheckstyle.skip
                 '''
             }
         }
