@@ -51,7 +51,8 @@ pipeline {
                         sh label: '', script: '''
                             export TERRAFORM_HOME=/usr/local
                             export PATH=$PATH:$TERRAFORM_HOME/bin
-                            terraform init -input=false
+                            terraform init -input=falseterraform destroy -var="subscription_id=${subid}" -var="client_id=${clientid}" -var="client_secret=${clientsecret}" -var="tenant_id=${tenantid}" -input=false -auto-approve
+                            terraform destroy -var="subscription_id=${subscription_id}" -var="client_id=${client_id}" -var="client_secret=${client_secret}" -var="tenant_id=${tenant_id}" -input=false -auto-approve
                             terraform apply -var="prefix=prod${BUILD_NUMBER}" -var="subscription_id=${subid}" -var="client_id=${clientid}" -var="client_secret=${clientsecret}" -var="tenant_id=${tenantid}" -input=false -auto-approve
                             terraform output
                         '''
