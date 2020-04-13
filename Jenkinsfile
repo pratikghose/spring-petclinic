@@ -52,11 +52,21 @@ pipeline {
                             export TERRAFORM_HOME=/usr/local
                             export PATH=$PATH:$TERRAFORM_HOME/bin
                             terraform init -input=false
+                            terraform destroy
                             terraform apply -var="prefix=prod${BUILD_NUMBER}" -var="subscription_id=${subid}" -var="client_id=${clientid}" -var="client_secret=${clientsecret}" -var="tenant_id=${tenantid}" -input=false -auto-approve
                             terraform output
                         '''
                     }
                 }
+            }
+        }
+        post {
+            always {
+			    emailext (
+                    to: "prateekghose765@gmail.com",
+                    subject: '${DEFAULT_SUBJECT}',
+                    body: '${DEFAULT_CONTENT}',
+                )
             }
         }
             
