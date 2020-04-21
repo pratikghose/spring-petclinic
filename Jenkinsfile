@@ -40,9 +40,11 @@ pipeline {
         
         stage('Deploy') {
             steps {
+                withCredentials([usernamePassword(credentialsId: 'Docker-Credentials', passwordVariable: 'password', usernameVariable: 'username')]){
     azureWebAppPublish azureCredentialsId: env.AZURE_CRED_ID, publishType: 'docker', resourceGroup: 'pratik-webapp', 
        appName: 'petclinic1', dockerImageName: 'pratikghose/petclinic', 
-       dockerImageTag: 'latest',dockerRegistryEndpoint: [credentialsId: env.DOCKER_CRED_ID, url: "https://hub.docker.com/"]
+       dockerImageTag: 'latest',dockerRegistryEndpoint: [credentialsId: Docker-Credentials, url: "https://hub.docker.com/"]
+            }
             }
         }
  
