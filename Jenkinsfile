@@ -40,15 +40,9 @@ pipeline {
         
         stage('Deploy') {
             steps {
-               
-               def resourceGroup = 'pratik-webapp'
-    def webAppName = 'petclinic1'
-    def registryServer = 'https://hub.docker.com/repository/docker/pratikghose/'
-    def imageTag = 'latest'
-    def imageName = "$registryServer/petclinic"
-    azureWebAppPublish azureCredentialsId: env.AZURE_CRED_ID, publishType: 'docker', resourceGroup: resourceGroup, 
-       appName: webAppName, dockerImageName: imageName, 
-       dockerImageTag: imageTag
+    azureWebAppPublish azureCredentialsId: env.AZURE_CRED_ID, publishType: 'docker', resourceGroup: 'pratik-webapp', 
+       appName: 'petclinic1', dockerImageName: 'pratikghose/petclinic', 
+       dockerImageTag: 'latest',dockerRegistryEndpoint: [credentialsId: 'pratikghose', url: "https://hub.docker.com/"]
             }
         }
  
