@@ -49,7 +49,6 @@ pipeline {
     azureWebAppPublish azureCredentialsId: env.AZURE_CRED_ID, publishType: 'docker', resourceGroup: resourceGroup, 
        appName: webAppName, dockerImageName: imageName, 
        dockerImageTag: imageTag
-                }
             }
         }
  
