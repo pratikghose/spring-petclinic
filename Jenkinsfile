@@ -4,6 +4,8 @@ node {
    }
    stage('build') {
       sh '''
+         export MAVEN_HOME=/usr/local/Cellar/maven/3.6.3_1/libexec
+         export PATH=$PATH:$MAVEN_HOME/bin
          mvn clean package
          cd target
          cp ../src/main/resources/web.config web.config
