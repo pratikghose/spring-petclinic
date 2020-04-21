@@ -42,7 +42,7 @@ pipeline {
             steps {
     azureWebAppPublish azureCredentialsId: env.AZURE_CRED_ID, publishType: 'docker', resourceGroup: 'pratik-webapp', 
        appName: 'petclinic1', dockerImageName: 'pratikghose/petclinic', 
-       dockerImageTag: 'latest',dockerRegistryEndpoint: [credentialsId: 'pratikghose', url: "https://hub.docker.com/"]
+       dockerImageTag: 'latest',dockerRegistryEndpoint: [credentialsId: env.DOCKER_CRED_ID, url: "https://hub.docker.com/"]
             }
         }
  
