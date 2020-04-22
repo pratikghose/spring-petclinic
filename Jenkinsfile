@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent {label "slave"}
     stages {
         stage('Build') {
             steps {
@@ -16,7 +16,7 @@ pipeline {
                         export DOCKER_HOME=/usr/local/
                         export PATH=$PATH:$DOCKER_HOME/bin
                         docker build -t pratikghose/pet-clinic:v1 .
-                        docker ps -q --filter name=pet-clinic_container|grep -q . && (docker stop pet-clinic_container && docker rm pet-clinic_container) ||echo pet-clinic_container doesn\\'t exists
+                        docker ps -qa --filter name=pet-clinic_container|grep -q . && (docker stop pet-clinic_container && docker rm pet-clinic_container) ||echo pet-clinic_container doesn\\'t exists
                         docker run --name pet-clinic_container -d -p 8080:8080 pratikghose/pet-clinic:v1
                         docker login -u ${username} -p ${password}
                         docker images
