@@ -7,13 +7,7 @@ pipeline {
                 sh "ls -lrtha"
                 sh "./mvnw clean package -Dcheckstyle.skip"
             }
-        }
-        stage('Code Analysis') {
-            steps {
-                sh "./mvnw verify sonar:sonar -Dcheckstyle.skip"
-            }
-        }
-        
+        }   
         stage('Containerization') {
             steps {
                 sh 'ls'
