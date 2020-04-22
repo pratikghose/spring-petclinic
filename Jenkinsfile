@@ -32,6 +32,8 @@ pipeline {
                 dir('Azure Container Registry Upload'){
                     withCredentials([usernamePassword(credentialsId: 'acr-pratik-id',passwordVariable: 'password', usernameVariable: 'username')]) {
                             sh'''
+                                export DOCKER_HOME=/usr/local/
+                                export PATH=$PATH:$DOCKER_HOME/bin
                                 docker login petclinicacr17.azurecr.io -u ${username} -p ${password}
                                 docker tag pratikghose/pet-clinic:v1 petclinicacr17.azurecr.io/pet-clinic:v1
                                 docker push petclinicacr17.azurecr.io/pet-clinic:v1
