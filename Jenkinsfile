@@ -17,7 +17,7 @@ pipeline {
         stage('Containerization') {
             steps {
                 sh 'ls'
-                withCredentials([usernamePassword(credentialsId: 'Docker-Credentials', passwordVariable: 'password', usernameVariable: 'username')]){
+                withCredentials([usernamePassword(credentialsId: 'docker-creds-pratik', passwordVariable: 'password', usernameVariable: 'username')]){
                     sh '''
                         docker build -t pratikghose/pet-clinic:v1 .
                         docker ps -q --filter name=pet-clinic_container|grep -q . && (docker stop pet-clinic_container && docker rm pet-clinic_container) ||echo pet-clinic_container doesn\\'t exists
