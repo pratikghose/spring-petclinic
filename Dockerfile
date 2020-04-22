@@ -1,3 +1,4 @@
-FROM openjdk:8-alpine
-WORKDIR /Users/pratik/.jenkins/workspace/Maven-pipeline-test/target
-CMD java -jar *.jar
+from openjdk
+COPY /target/spring*.jar pet-animal/
+EXPOSE 8080
+CMD java -jar -Dspring.profiles.active=mysql pet-animal/*.jar
