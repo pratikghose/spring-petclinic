@@ -17,7 +17,7 @@ pipeline {
                         export PATH=$PATH:$DOCKER_HOME/bin
                         docker build -t pratikghose/pet-clinic:${BUILD_NUMBER} .
                         docker ps -qa --filter name=pet-clinic_container|grep -q . && (docker stop pet-clinic_container && docker rm pet-clinic_container) ||echo pet-clinic_container doesn\\'t exists
-                        docker run --name pet-clinic_container -d -p 8080:8080 pratikghose/pet-clinic:${BUILD_NUMBER}
+                        #docker run --name pet-clinic_container -d -p 8080:8080 pratikghose/pet-clinic:${BUILD_NUMBER}
                         docker login -u ${username} -p ${password}
                         docker images
                         docker push pratikghose/pet-clinic:${BUILD_NUMBER}
