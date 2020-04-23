@@ -52,7 +52,7 @@ pipeline {
                     #az aks create -n petclinicdemo -g pratik-webapp --generate-ssh-keys --attach-acr /subscriptions/$AZURE_SUBSCRIPTION_ID/resourceGroups/pratik-webapp/providers/Microsoft.ContainerRegistry/registries/petclinicacr17
                     az aks get-credentials --resource-group pratik-webapp --name petclinicdemo
                     kubectl get nodes
-                    kubectl set image deployment/petclinic-app webapp=pratikghose/petclinic:${BUILD_NUMBER}
+                    kubectl set image deployment/petclinic webapp=pratikghose/petclinic:${BUILD_NUMBER}
                   '''
                 }
                 sh 'az logout'
