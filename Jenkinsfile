@@ -54,7 +54,7 @@ pipeline {
                     kubectl apply -f deploytoAksCluster.yml --validate=false
                     kubectl get deployments
                     kubectl get nodes
-                    kubectl set image deployment/petclinic webapp=pratikghose/petclinic:${BUILD_NUMBER}
+                    kubectl set image webapp=petclinicacr17.azurecr.io/pet-clinic:${BUILD_NUMBER}
                   '''
                 }
                 sh 'az logout'
