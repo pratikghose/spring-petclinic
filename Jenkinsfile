@@ -30,13 +30,13 @@ pipeline {
         stage('push to acr') {
             steps {
                 dir('Azure Container Registry Upload'){
-                    withCredentials([usernamePassword(credentialsId: 'acr-pratik-id',passwordVariable: 'password', usernameVariable: 'username')]) {
+                    withCredentials([usernamePassword(credentialsId: 'acr_creds',passwordVariable: 'password', usernameVariable: 'username')]) {
                             sh'''
                                 export DOCKER_HOME=/usr/local/
                                 export PATH=$PATH:$DOCKER_HOME/bin
-                                docker login petclinicacr17.azurecr.io -u ${username} -p ${password}
-                                docker tag pratikghose/pet-clinic:${BUILD_NUMBER} petclinicacr17.azurecr.io/pet-clinic:${BUILD_NUMBER}
-                                docker push petclinicacr17.azurecr.io/pet-clinic:${BUILD_NUMBER}
+                                docker login myfirstprivateregistry.azurecr.io -u ${username} -p ${password}
+                                docker tag pratikghose/pet-clinic:${BUILD_NUMBER} myfirstprivateregistry.azurecr.io/pet-clinic:${BUILD_NUMBER}
+                                docker push myfirstprivateregistry.azurecr.io/pet-clinic:${BUILD_NUMBER}
                             '''
                     }
                 }
@@ -53,7 +53,7 @@ pipeline {
                     az aks get-credentials --resource-group Demo-4 --name pet-clinic
                     kubectl get deployments
                     kubectl get nodes
-                    kubectl set image deployment/petclinic-app webapp=petclinicacr17.azurecr.io/pet-clinic:${BUILD_NUMBER}
+                    kubectl set image deployment/petclinic-app webapp=myfirstprivateregistry.azurecr.io/pet-clinic:${BUILD_NUMBER}
                     kubectl get services petclinic-app
                   '''
                 }
