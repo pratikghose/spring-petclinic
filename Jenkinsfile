@@ -50,7 +50,7 @@ pipeline {
                     az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID
                     az account set -s $AZURE_SUBSCRIPTION_ID
                     #az aks create -n petclinicdemo -g pratik-webapp --generate-ssh-keys --attach-acr /subscriptions/$AZURE_SUBSCRIPTION_ID/resourceGroups/pratik-webapp/providers/Microsoft.ContainerRegistry/registries/petclinicacr17
-                    az aks get-credentials --resource-group pratik-webapp --name petclinicdemo
+                    az aks get-credentials --resource-group Demo-4 --name pet-clinic
                     kubectl get deployments
                     kubectl get nodes
                     kubectl set image deployment/petclinic-app webapp=petclinicacr17.azurecr.io/pet-clinic:${BUILD_NUMBER}
