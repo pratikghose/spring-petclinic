@@ -49,7 +49,7 @@ pipeline {
                   sh '''
                     az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID
                     az account set -s $AZURE_SUBSCRIPTION_ID
-                    #az aks create -n myAKSCluster -g myResourceGroup --generate-ssh-keys --attach-acr /subscriptions/$AZURE_SUBSCRIPTION_ID/resourceGroups/pratik-webapp/providers/Microsoft.ContainerRegistry/registries/petclinicacr17
+                    az aks create -n petclinicdemo -g pratik-webapp --generate-ssh-keys --attach-acr /subscriptions/$AZURE_SUBSCRIPTION_ID/resourceGroups/pratik-webapp/providers/Microsoft.ContainerRegistry/registries/petclinicacr17
                     az aks get-credentials --resource-group pratik-webapp --name petclinicdemo
                     kubectl get nodes
                     kubectl set image deployment/petclinic-app webapp=pratikghose/petclinic:${BUILD_NUMBER}
