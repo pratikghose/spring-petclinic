@@ -54,6 +54,7 @@ pipeline {
                     kubectl get deployments
                     kubectl get nodes
                     kubectl set image deployment/petclinic-app webapp=petclinicacr17.azurecr.io/pet-clinic:${BUILD_NUMBER}
+                    kubectl get services petclinic-app
                   '''
                 }
                 sh 'az logout'
